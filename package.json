@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "build": "webpack",
+    "build": "rm -rf dist && webpack",
     "start": "webpack-dev-server --open",
-    "flow": "flow"
+    "flow": "flow",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -22,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/MaximKalinin/demolesson/issues"
   },
-  "homepage": "https://github.com/MaximKalinin/demolesson#readme",
+  "homepage": "https://maximkalinin.github.io/demolesson",
   "dependencies": {
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
@@ -37,6 +39,7 @@
     "css-loader": "^3.2.0",
     "file-loader": "^4.2.0",
     "flow-bin": "^0.112.0",
+    "gh-pages": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
     "style-loader": "^1.0.0",
     "webpack": "^4.41.2",

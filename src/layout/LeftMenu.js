@@ -15,10 +15,9 @@ const LeftMenuEl = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 100px 35px;
+  padding: 100px 15px;
   position: relative;
   box-sizing: border-box;
-  /* width: ${WIDTH}px; */
 `;
 
 const ActionsEl = styled.div`
@@ -36,8 +35,7 @@ const ActionEl = styled.div`
     font-size: 14px;
     margin-bottom: 12px;
     display: block;
-    font-family: Helvetica, Arial, sans-serif;
-    font-weight: 100;
+    font-weight: 300;
   }
   > img {
     margin-bottom: 65px;
