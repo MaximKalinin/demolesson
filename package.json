@@ -1,0 +1,49 @@
+{
+  "name": "demolesson",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "build": "webpack",
+    "start": "webpack-dev-server --open",
+    "flow": "flow"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaximKalinin/demolesson.git"
+  },
+  "keywords": [
+    "demolesson",
+    "history"
+  ],
+  "author": "Maksim Kalinin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaximKalinin/demolesson/issues"
+  },
+  "homepage": "https://github.com/MaximKalinin/demolesson#readme",
+  "dependencies": {
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.7.0",
+    "babel-loader": "^8.0.6",
+    "flow-bin": "^0.112.0",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-flow",
+      "@babel/preset-react",
+      "@babel/preset-env"
+    ]
+  }
+}
