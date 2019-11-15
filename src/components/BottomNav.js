@@ -16,7 +16,6 @@ const Next = styled.span`
 `;
 
 const BottomNavEl = styled.div`
-  display: flex;
   img {
     margin-right: 24px;
   }
@@ -26,14 +25,23 @@ const BottomNavEl = styled.div`
 `;
 
 export const BottomNav = (props: IBottomNavProps) => {
-  const { next, onClick } = props;
+  const { next, onNext, back, onBack } = props;
   return (
-    <BottomNavEl onClick={ onClick }>
-      <img src={ scrollImg } />
-      <div>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      flexDirection: 'row-reverse'
+    }}>
+      <BottomNavEl onClick={ onNext }>
         <Next>{ next }</Next>
         <span>Далее</span>
-      </div>
-    </BottomNavEl>
+      </BottomNavEl>
+      {back &&
+        <BottomNavEl onClick={onBack}>
+          <Next>{back}</Next>
+          <span>Назад</span>
+        </BottomNavEl>
+      }
+    </div>
   );
 }

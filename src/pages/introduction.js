@@ -13,10 +13,11 @@ export const B = styled.b`
 `;
 
 export interface ISlideProps {
-  onNavClick: Function;
+  onNextClick: Function;
+  onPrevClick: Function;
 }
 
-export const introduction = ({ onNavClick }: ISlideProps) => ({
+export const introduction = ({ onNextClick }: ISlideProps) => ({
   h2: 'Введение',
   h1: 'Боги Древней Греции',
   content: <React.Fragment>
@@ -27,7 +28,7 @@ export const introduction = ({ onNavClick }: ISlideProps) => ({
       Во времена <B>Древней Греции</B> люди свято чтили сотни <B>различных божеств</B>, во главе которых стоял эгидодержавный <B>Зевс.</B> Боги не только помогали им в повседневных делах, но и <B>вершили судьбы</B> целых городов и народов.
     </p>
   </React.Fragment>,
-  bottomNav: <BottomNav next={ 'Хаос' } onClick={ onNavClick } />
+  bottomNav: <BottomNav next={ 'Хаос' } onNext={ onNextClick } />
 });
 
 export const introductionBody = () => (<div style={{

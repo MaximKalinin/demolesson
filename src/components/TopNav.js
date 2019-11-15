@@ -9,7 +9,7 @@ const TopNavEl = styled.div`
   border-radius: 16px;
   background: white;
   overflow: hidden;
-  height: 44px;
+  height: 55px;
   animation: topNavEl .7s ease-out;
 
   @keyframes topNavEl {
@@ -32,7 +32,7 @@ const ScrollBar = styled.div`
     top: 0;
     left: 0;
     bottom: 0;
-    background: red;
+    background: linear-gradient(90deg, #FFD75B 0vw, #FFB593 10vw);
     border-right: 1px solid white;
     width: ${({ width }) => `${width}%`};
     transition: width .3s;
@@ -48,12 +48,18 @@ const Chapter = styled.span`
   font-weight: 300;
   font-size: 10px;
   padding: 10px 0;
+  transition: all .3s;
+  &.active {
+    font-size: 16px;
+    font-weight: 600;
+  }
 `;
 
 const ContentList = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0 40px;
+  align-items: flex-end;
 `;
 
 export const TopNav = (props) => {
@@ -66,7 +72,7 @@ export const TopNav = (props) => {
       </ScrollBar>
       <ContentList>
         <Chapter>{ chapter }</Chapter>
-        { list.map(text => <Chapter key={ text }>{ text }</Chapter>) }
+        { list.map((text, index) => <Chapter key={ text } className={ slide === index && 'active' || ''}>{ text }</Chapter>) }
       </ContentList>
     </TopNavEl>
   );

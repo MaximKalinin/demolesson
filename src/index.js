@@ -79,7 +79,8 @@ const withDndProvider = (Component) => (props) => <DndProvider backend={TouchBac
 
 const App = (props: IAppProps) => {
   const [slide, setSlide] = useState<number>(0);
-  const onNavClick = () => content[slide + 1] ? setSlide(slide + 1) : undefined;
+  const onNextClick = () => content[slide + 1] ? setSlide(slide + 1) : undefined;
+  const onPrevClick = () => slide - 1 >= 0 ? setSlide(slide - 1) : undefined;
   return (
     <AppWrapper>
       <LeftMenu actions={ actions } />
@@ -89,7 +90,7 @@ const App = (props: IAppProps) => {
             { content.map(({ description }, index) => (
               <ISlideEl className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' } key={index}>
                 <Description
-                  { ...description({ onNavClick }) }
+                  { ...description({ onNextClick, onPrevClick }) }
                 />
               </ISlideEl>
             )) }

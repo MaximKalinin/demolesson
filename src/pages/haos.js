@@ -7,7 +7,7 @@ import universeImg from '../../img/universe-placeholder.svg';
 import { ISlideProps, BigP, B } from './introduction';
 import zeusImg from "../../img/zeus.svg";
 
-export const haos = ({ onNavClick }: ISlideProps) => ({
+export const haos = ({ onNextClick, onPrevClick }: ISlideProps) => ({
   h2: 'Хаос',
   h1: 'Но в начале не было ничего...',
   content: <React.Fragment>
@@ -19,7 +19,7 @@ export const haos = ({ onNavClick }: ISlideProps) => ({
       Помести <b>Хаос</b> на свое место, и мы откроем происхождение древнегреческих богов - ПАНТЕОН.
     </p>
   </React.Fragment>,
-  bottomNav: <BottomNav next={ 'Пантеон' } onClick={ onNavClick } />
+  bottomNav: <BottomNav next={ 'Пантеон' } onNext={ onNextClick } onBack={ onPrevClick } back={'Хаос'} />
 });
 
 export const haosBody = () => {
