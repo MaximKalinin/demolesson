@@ -9,7 +9,7 @@ const RightDescriptionEl = styled.div`
   box-sizing: border-box;
   background: white;
   flex: 400px 0 0;
-  border-radius: 60px;
+  border-radius: 50px;
   animation: rightDescription .7s ease-out;
   position: relative;
 

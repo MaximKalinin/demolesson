@@ -6,7 +6,7 @@ const MainEl = styled.div`
   width: 100%;
   height: 100%;
   background: #F2F2F2;
-  border-radius: 60px;
+  border-radius: 50px;
 `;
 
 export const Main = (props) => {

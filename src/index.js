@@ -10,8 +10,9 @@ import { RightDescription } from './layout/RightDescription';
 import watchImg from '../img/watch.svg';
 import readImg from '../img/read.svg';
 import scrollImg from '../img/scroll.svg';
-import zeusImg from '../img/zeus.svg';
-import heavenImg from '../img//heaven.svg';
+import TouchBackend from 'react-dnd-touch-backend';
+import { DndProvider } from 'react-dnd';
+import heavenImg from '../img/heaven.svg';
 import { Description } from './components/Description';
 import { TopNav } from './components/TopNav';
 
@@ -74,8 +75,11 @@ const ISlideEl = styled.div`
   }
 `;
 
+const withDndProvider = (Component) => (props) => <DndProvider backend={TouchBackend}><Component {...props}/></DndProvider>;
+
 const App = (props: IAppProps) => {
   const [slide, setSlide] = useState<number>(0);
+  const onNavClick = () => content[slide + 1] ? setSlide(slide + 1) : undefined;
   return (
     <AppWrapper>
       <LeftMenu actions={ actions } />
@@ -83,10 +87,9 @@ const App = (props: IAppProps) => {
         <div style={ { display: 'flex', flexDirection: 'row-reverse', height: '100%' } }>
           <RightDescription>
             { content.map(({ description }, index) => (
-              <ISlideEl className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' } >
-                { console.log(index, slide - 1, index === slide - 1) }
+              <ISlideEl className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' } key={index}>
                 <Description
-                  { ...description({ onNavClick: () => setSlide(slide + 1) }) }
+                  { ...description({ onNavClick }) }
                 />
               </ISlideEl>
             )) }
@@ -98,7 +101,7 @@ const App = (props: IAppProps) => {
               slide={ slide }
             />
             <ISlideEl>
-              { content.map(({ body }, index) => (<ISlideEl className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' }>{ body }</ISlideEl>)) }
+              { content.map(({ body }, index) => (<ISlideEl className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' } key={index}>{ body() }</ISlideEl>)) }
             </ISlideEl>
           </Scene>
           <div style={ {
@@ -117,9 +120,11 @@ const App = (props: IAppProps) => {
       </Main>
     </AppWrapper>
   );
-}
+};
 
 const appElement = document.getElementById('app');
 
+const AppWithProviders = withDndProvider(App);
+
 if (appElement)
-  ReactDOM.render(<App />, appElement);
+  ReactDOM.render(<AppWithProviders />, appElement);
