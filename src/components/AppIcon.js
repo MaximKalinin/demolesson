@@ -33,7 +33,6 @@ export const AppIcon = (props) => {
 	const [{isDragging}, drag] = useDrag({
 		item: { type: 'AppIcon' },
 		collect: monitor => {
-			console.log(monitor.isDragging());
 			return ({isDragging: false})
 		}
 	});

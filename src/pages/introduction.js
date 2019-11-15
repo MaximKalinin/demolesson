@@ -30,4 +30,11 @@ export const introduction = ({ onNavClick }: ISlideProps) => ({
   bottomNav: <BottomNav next={ 'Хаос' } onClick={ onNavClick } />
 });
 
-export const introductionBody = () => (<img src={ zeusImg } style={ { maxWidth: '100%', marginTop: 'calc(60px + 44px)' } } />);
+export const introductionBody = () => (<div style={{
+  background: `url(${zeusImg})`,
+  width: '100%',
+  height: '100%',
+  backgroundPosition: 'center',
+  backgroundSize: 'contain',
+  backgroundRepeat: 'no-repeat'
+}}/>);

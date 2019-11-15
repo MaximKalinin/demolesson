@@ -5,6 +5,7 @@ import { BottomNav } from '../components/BottomNav';
 import { AppIcon } from '../components/AppIcon';
 import universeImg from '../../img/universe-placeholder.svg';
 import { ISlideProps, BigP, B } from './introduction';
+import zeusImg from "../../img/zeus.svg";
 
 export const haos = ({ onNavClick }: ISlideProps) => ({
   h2: 'Хаос',
@@ -22,14 +23,31 @@ export const haos = ({ onNavClick }: ISlideProps) => ({
 });
 
 export const haosBody = () => {
-  const [, drop] = useDrop({
+  const [{isOver}, drop] = useDrop({
     accept: 'AppIcon',
     drop: () => console.log(drop),
+    collect: monitor => ({
+      isOver: !!monitor.isOver(),
+    }),
   });
+  console.log({isOver});
   return (
-    <div style={{position: 'relative', marginTop: 'calc(60px + 44px)'}}>
+    <div style={{
+      position: 'relative',
+      width: '100%',
+      height: '100%'
+    }}>
       <div style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}>
-        <div style={{border: '1px dashed black', width: '70px', height: '70px', borderRadius: '10px', padding: '10px'}} ref={drop}>
+        <div
+          style={{
+            border: '1px dashed black',
+            width: '70px',
+            height: '70px',
+            borderRadius: '10px',
+            padding: '10px'
+          }}
+          ref={drop}
+        >
           <div style={{
             borderRadius: '50%',
             background: 'white',
@@ -43,7 +61,14 @@ export const haosBody = () => {
           }}>+</div>
         </div>
       </div>
-      <img src={ universeImg } style={ { width: '100%' } } />
+      <div style={{
+        background: `url(${universeImg})`,
+        width: '100%',
+        height: '100%',
+        backgroundPosition: 'center',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat'
+      }}/>
     </div>
   );
 };

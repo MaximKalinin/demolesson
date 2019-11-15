@@ -39,7 +39,7 @@ interface IAppProps {
 
 const ISlideEl = styled.div`
   position: absolute;
-  top: 0;
+  top: ${({top}) => top && top || 0};
   right: 0;
   bottom: 0;
   left: 0;
@@ -100,12 +100,10 @@ const App = (props: IAppProps) => {
               list={ ['Введение', 'Хаос', 'ПАНТЕОН', 'Уран', 'Кронос', 'Зевс', 'Аид', 'Посейдон', 'Другие боги', 'ФИНАЛ'] }
               slide={ slide }
             />
-            <ISlideEl>
-              { content.map(({ body }, index) => (<ISlideEl className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' } key={index}>{ body() }</ISlideEl>)) }
-            </ISlideEl>
+              { content.map(({ body }, index) => (<ISlideEl top={'64px'} className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' } key={index}>{ body() }</ISlideEl>)) }
           </Scene>
           <div style={ {
-            margin: '40px 0 40px 40px',
+            margin: '87px 0 40px 40px',
             height: '44px',
             background: 'white',
             flex: '44px 0 0',

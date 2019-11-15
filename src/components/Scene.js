@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const SceneEl = styled.div`
-  margin: 40px;
+  margin: 87px 40px;
   flex-grow: 1;
   position: relative;
   > img {

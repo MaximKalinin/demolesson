@@ -21,6 +21,7 @@ const DescriptionEl = styled.div`
     font-weight: 300;
     text-transform: capitalize;
     margin-bottom: 9px;
+    margin-top 0;
   }
   h1 {
     font-size: 40px;
