@@ -6,6 +6,7 @@ import scrollImg from '../../img/scroll-black.svg';
 
 interface IBottomNavProps {
   next: string;
+  onClick: Function;
 }
 
 const Next = styled.span`
@@ -25,9 +26,9 @@ const BottomNavEl = styled.div`
 `;
 
 export const BottomNav = (props: IBottomNavProps) => {
-  const { next } = props;
+  const { next, onClick } = props;
   return (
-    <BottomNavEl>
+    <BottomNavEl onClick={ onClick }>
       <img src={ scrollImg } />
       <div>
         <Next>{ next }</Next>

@@ -1,17 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import { BottomNav } from '../components/BottomNav';
+import zeusImg from '../../img/zeus.svg';
 
-const BigP = styled.p`
+export const BigP = styled.p`
   font-size: 26px;
   margin-top: 39px;
 `;
 
-const B = styled.b`
+export const B = styled.b`
   font-weight: 600;
 `;
 
-export const introduction = {
+export interface ISlideProps {
+  onNavClick: Function;
+}
+
+export const introduction = ({ onNavClick }: ISlideProps) => ({
   h2: 'Введение',
   h1: 'Боги Древней Греции',
   content: <React.Fragment>
@@ -22,5 +27,7 @@ export const introduction = {
       Во времена <B>Древней Греции</B> люди свято чтили сотни <B>различных божеств</B>, во главе которых стоял эгидодержавный <B>Зевс.</B> Боги не только помогали им в повседневных делах, но и <B>вершили судьбы</B> целых городов и народов.
     </p>
   </React.Fragment>,
-  bottomNav: <BottomNav next={ 'Хаос' } />
-}
+  bottomNav: <BottomNav next={ 'Хаос' } onClick={ onNavClick } />
+});
+
+export const introductionBody = (<img src={ zeusImg } style={ { maxWidth: '100%', marginTop: 'calc(60px + 44px)' } } />);

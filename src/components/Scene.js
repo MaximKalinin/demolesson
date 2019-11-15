@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 const SceneEl = styled.div`
   margin: 40px;
+  flex-grow: 1;
+  position: relative;
   > img {
     animation: fadeIn .7s ease-out;
   }

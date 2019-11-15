@@ -34,7 +34,8 @@ const ScrollBar = styled.div`
     bottom: 0;
     background: red;
     border-right: 1px solid white;
-    width: 10%;
+    width: ${({ width }) => `${width}%`};
+    transition: width .3s;
   }
   > div {
     height: 100%;
@@ -56,16 +57,16 @@ const ContentList = styled.div`
 `;
 
 export const TopNav = (props) => {
-  const { chapter, list, active } = props;
+  const { chapter, list, slide } = props;
   return (
     <TopNavEl>
-      <ScrollBar>
+      <ScrollBar width={ (slide + 1) / list.length * 100 }>
         <span />
         <div />
       </ScrollBar>
       <ContentList>
         <Chapter>{ chapter }</Chapter>
-        { list.map(text => <Chapter>{ text }</Chapter>) }
+        { list.map(text => <Chapter key={ text }>{ text }</Chapter>) }
       </ContentList>
     </TopNavEl>
   );

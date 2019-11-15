@@ -1,16 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import fp from 'lodash/fp';
 
 const RightDescriptionEl = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 100px 35px;
   box-sizing: border-box;
   background: white;
-  flex: 28% 0 0;
+  flex: 400px 0 0;
   border-radius: 60px;
   animation: rightDescription .7s ease-out;
+  position: relative;
 
   @keyframes rightDescription {
     0% {

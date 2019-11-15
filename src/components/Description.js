@@ -14,6 +14,8 @@ const DescriptionEl = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  padding: 100px 35px;
+  box-sizing: border-box;
   h2 {
     font-size: 16px;
     font-weight: 300;

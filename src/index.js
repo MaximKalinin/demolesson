@@ -1,5 +1,6 @@
 // @flow
-import React from 'react';
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import ReactDOM from 'react-dom';
 import { AppWrapper } from './layout/AppWrapper';
 import './index.css';
@@ -14,8 +15,11 @@ import heavenImg from '../img//heaven.svg';
 import { Description } from './components/Description';
 import { TopNav } from './components/TopNav';
 
-import { introduction } from './pages/introduction';
+import { introduction, introductionBody } from './pages/introduction';
 import { Scene } from './components/Scene';
+import { haos, haosBody } from './pages/haos';
+
+const content = [{ description: introduction, body: introductionBody }, { description: haos, body: haosBody }];
 
 const actions = [{
   text: 'Смотри',
@@ -32,23 +36,70 @@ interface IAppProps {
 
 }
 
+const ISlideEl = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  visibility: hidden;
+  &.current {
+    visibility: visible;
+    animation: slideInCurrent 1s ease-out;
+  }
+  &.prev {
+    visibility: visible;
+    opacity: 0;
+    animation: slideOutCurrent 1s ease-out;
+  }
+  @keyframes slideInCurrent {
+    0% {
+      transform: translateY(70%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slideOutCurrent {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-70%);
+      opacity: 0;
+    }
+  }
+`;
+
 const App = (props: IAppProps) => {
+  const [slide, setSlide] = useState<number>(0);
   return (
     <AppWrapper>
       <LeftMenu actions={ actions } />
       <Main>
         <div style={ { display: 'flex', flexDirection: 'row-reverse', height: '100%' } }>
           <RightDescription>
-            <Description
-              { ...introduction }
-            />
+            { content.map(({ description }, index) => (
+              <ISlideEl className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' } >
+                { console.log(index, slide - 1, index === slide - 1) }
+                <Description
+                  { ...description({ onNavClick: () => setSlide(slide + 1) }) }
+                />
+              </ISlideEl>
+            )) }
           </RightDescription>
           <Scene>
             <TopNav
               chapter={ '2. БОГИ' }
               list={ ['Введение', 'Хаос', 'ПАНТЕОН', 'Уран', 'Кронос', 'Зевс', 'Аид', 'Посейдон', 'Другие боги', 'ФИНАЛ'] }
+              slide={ slide }
             />
-            <img src={ zeusImg } style={ { maxWidth: '100%', marginTop: '60px' } } />
+            <ISlideEl>
+              { content.map(({ body }, index) => (<ISlideEl className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' }>{ body }</ISlideEl>)) }
+            </ISlideEl>
           </Scene>
           <div style={ {
             margin: '40px 0 40px 40px',
