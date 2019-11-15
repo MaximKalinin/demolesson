@@ -16,6 +16,13 @@ const Next = styled.span`
 `;
 
 const BottomNavEl = styled.div`
+  & * {
+    user-select: none;
+  }
+  cursor: pointer;
+  &:hover {
+    color: blue;
+  }
   img {
     margin-right: 24px;
   }
@@ -27,18 +34,18 @@ const BottomNavEl = styled.div`
 export const BottomNav = (props: IBottomNavProps) => {
   const { next, onNext, back, onBack } = props;
   return (
-    <div style={{
+    <div style={ {
       display: 'flex',
       justifyContent: 'space-between',
       flexDirection: 'row-reverse'
-    }}>
+    } }>
       <BottomNavEl onClick={ onNext }>
         <Next>{ next }</Next>
         <span>Далее</span>
       </BottomNavEl>
-      {back &&
-        <BottomNavEl onClick={onBack}>
-          <Next>{back}</Next>
+      { back &&
+        <BottomNavEl onClick={ onBack }>
+          <Next>{ back }</Next>
           <span>Назад</span>
         </BottomNavEl>
       }

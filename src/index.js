@@ -10,17 +10,19 @@ import { RightDescription } from './layout/RightDescription';
 import watchImg from '../img/watch.svg';
 import readImg from '../img/read.svg';
 import scrollImg from '../img/scroll.svg';
+import greekFont from '../fonts/Greek.ttf';
 import TouchBackend from 'react-dnd-touch-backend';
 import { DndProvider } from 'react-dnd';
 import heavenImg from '../img/heaven.svg';
 import { Description } from './components/Description';
 import { TopNav } from './components/TopNav';
+import fp from 'lodash/fp';
 
 import { introduction, introductionBody } from './pages/introduction';
 import { Scene } from './components/Scene';
-import { haos, haosBody } from './pages/haos';
+import { haos, haosBody, leftHeader } from './pages/haos';
 
-const content = [{ description: introduction, body: introductionBody }, { description: haos, body: haosBody }];
+const content = [{ description: introduction, body: introductionBody, leftHeader: null }, { description: haos, body: haosBody, leftHeader: leftHeader }];
 
 const actions = [{
   text: 'Смотри',
@@ -78,6 +80,13 @@ const ISlideEl = styled.div`
 `;
 
 const withDndProvider = (Component) => (props) => <DndProvider backend={ TouchBackend }><Component { ...props } /></DndProvider>;
+const withStyles = (Component) => (props) => (
+  <React.Fragment>
+    <style>
+    </style>
+    <Component { ...props } />
+  </React.Fragment>
+);
 
 const App = (props: IAppProps) => {
   const [slide, setSlide] = useState<number>(0);
@@ -107,15 +116,26 @@ const App = (props: IAppProps) => {
           </Scene>
           <div style={ {
             margin: '87px 0 40px 40px',
-            height: '44px',
-            background: 'white',
             flex: '44px 0 0',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: '16px'
-          } }>
-            <img src={ heavenImg } style={ { height: '30px' } } />
+            position: 'relative'
+          } }
+          >
+            <div style={ {
+              height: '44px',
+              background: 'white',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: '16px',
+            } }>
+              <img src={ heavenImg } style={ { height: '30px' } } />
+            </div>
+            { content.map(({ leftHeader }, index) => (
+              leftHeader &&
+              <ISlideEl className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' } key={ index }>
+                { leftHeader }
+              </ISlideEl>
+            )) }
           </div>
         </div>
       </Main>
@@ -125,7 +145,7 @@ const App = (props: IAppProps) => {
 
 const appElement = document.getElementById('app');
 
-const AppWithProviders = withDndProvider(App);
+const AppWithProviders = fp.flow([withDndProvider, withStyles])(App);
 
 if (appElement)
   ReactDOM.render(<AppWithProviders />, appElement);

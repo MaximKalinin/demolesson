@@ -19,36 +19,36 @@ export const haos = ({ onNextClick, onPrevClick }: ISlideProps) => ({
       Помести <b>Хаос</b> на свое место, и мы откроем происхождение древнегреческих богов - ПАНТЕОН.
     </p>
   </React.Fragment>,
-  bottomNav: <BottomNav next={ 'Пантеон' } onNext={ onNextClick } onBack={ onPrevClick } back={'Хаос'} />
+  bottomNav: <BottomNav next={ 'Пантеон' } onNext={ onNextClick } onBack={ onPrevClick } back={ 'Хаос' } />
 });
 
 export const haosBody = () => {
-  const [{isOver}, drop] = useDrop({
+  const [{ isOver }, drop] = useDrop({
     accept: 'AppIcon',
     drop: () => console.log(drop),
     collect: monitor => ({
       isOver: !!monitor.isOver(),
     }),
   });
-  console.log({isOver});
+  console.log({ isOver });
   return (
-    <div style={{
+    <div style={ {
       position: 'relative',
       width: '100%',
       height: '100%'
-    }}>
-      <div style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}>
+    } }>
+      <div style={ { position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' } }>
         <div
-          style={{
+          style={ {
             border: '1px dashed black',
             width: '70px',
             height: '70px',
             borderRadius: '10px',
             padding: '10px'
-          }}
-          ref={drop}
+          } }
+          ref={ drop }
         >
-          <div style={{
+          <div style={ {
             borderRadius: '50%',
             background: 'white',
             height: '100%',
@@ -58,17 +58,29 @@ export const haosBody = () => {
             alignItems: 'center',
             fontSize: '40px',
             color: '#D4D4D4'
-          }}>+</div>
+          } }>+</div>
         </div>
       </div>
-      <div style={{
+      <div style={ {
         background: `url(${universeImg})`,
-        width: '100%',
+        boxSizing: 'border-box',
+        width: '90%',
+        margin: 'auto',
         height: '100%',
         backgroundPosition: 'center',
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat'
-      }}/>
+      } } />
     </div>
   );
 };
+
+export const leftHeader = (<span style={ {
+  transform: 'rotate(-90deg) scale(2)',
+  textTransform: 'uppercase',
+  display: 'block',
+  fontFamily: 'Times',
+  marginTop: '30vh',
+  fontSize: '30px',
+  position: 'absolute'
+} }>χάος</span>);
