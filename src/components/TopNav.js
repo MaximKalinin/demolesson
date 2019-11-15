@@ -9,8 +9,10 @@ const TopNavEl = styled.div`
   border-radius: 16px;
   background: white;
   overflow: hidden;
-  height: 55px;
+  height: 44px;
   animation: topNavEl .7s ease-out;
+  z-index: 100;
+  position: relative;
 
   @keyframes topNavEl {
     0% {
@@ -47,7 +49,10 @@ const ScrollBar = styled.div`
 const Chapter = styled.span`
   font-weight: 300;
   font-size: 10px;
-  padding: 10px 0;
+  padding: 5px 0;
+  height: 20px;
+  display: flex;
+  align-items: flex-end;
   transition: all .3s;
   &.active {
     font-size: 16px;
@@ -66,13 +71,13 @@ export const TopNav = (props) => {
   const { chapter, list, slide } = props;
   return (
     <TopNavEl>
-      <ScrollBar width={ (slide + 1) / list.length * 100 }>
+      <ScrollBar width={ (slide + 1.5) / list.length * 100 }>
         <span />
         <div />
       </ScrollBar>
       <ContentList>
         <Chapter>{ chapter }</Chapter>
-        { list.map((text, index) => <Chapter key={ text } className={ slide === index && 'active' || ''}>{ text }</Chapter>) }
+        { list.map((text, index) => <Chapter key={ text } className={ slide === index && 'active' || '' }>{ text }</Chapter>) }
       </ContentList>
     </TopNavEl>
   );

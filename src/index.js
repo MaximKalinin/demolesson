@@ -39,19 +39,21 @@ interface IAppProps {
 
 const ISlideEl = styled.div`
   position: absolute;
-  top: ${({top}) => top && top || 0};
+  top: ${({ top }) => top && top || 0};
   right: 0;
   bottom: 0;
   left: 0;
-  visibility: hidden;
+  opacity: 0;
+  transform: translateY(70%);
+  transition: opacity 0.5s, transform 0.5s;
   &.current {
-    visibility: visible;
-    animation: slideInCurrent 1s ease-out;
+    opacity: 1;
+    transform: translateY(0);
+    z-index: 10;
   }
   &.prev {
-    visibility: visible;
     opacity: 0;
-    animation: slideOutCurrent 1s ease-out;
+    transform: translateY(-70%);
   }
   @keyframes slideInCurrent {
     0% {
@@ -75,7 +77,7 @@ const ISlideEl = styled.div`
   }
 `;
 
-const withDndProvider = (Component) => (props) => <DndProvider backend={TouchBackend}><Component {...props}/></DndProvider>;
+const withDndProvider = (Component) => (props) => <DndProvider backend={ TouchBackend }><Component { ...props } /></DndProvider>;
 
 const App = (props: IAppProps) => {
   const [slide, setSlide] = useState<number>(0);
@@ -88,7 +90,7 @@ const App = (props: IAppProps) => {
         <div style={ { display: 'flex', flexDirection: 'row-reverse', height: '100%' } }>
           <RightDescription>
             { content.map(({ description }, index) => (
-              <ISlideEl className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' } key={index}>
+              <ISlideEl className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' } key={ index }>
                 <Description
                   { ...description({ onNextClick, onPrevClick }) }
                 />
@@ -101,7 +103,7 @@ const App = (props: IAppProps) => {
               list={ ['Введение', 'Хаос', 'ПАНТЕОН', 'Уран', 'Кронос', 'Зевс', 'Аид', 'Посейдон', 'Другие боги', 'ФИНАЛ'] }
               slide={ slide }
             />
-              { content.map(({ body }, index) => (<ISlideEl top={'64px'} className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' } key={index}>{ body() }</ISlideEl>)) }
+            { content.map(({ body }, index) => (<ISlideEl top={ '64px' } className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' } key={ index }>{ body() }</ISlideEl>)) }
           </Scene>
           <div style={ {
             margin: '87px 0 40px 40px',
