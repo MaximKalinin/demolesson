@@ -6,7 +6,7 @@ const TopNavEl = styled.div`
 
 const NavWrapper = styled.div`
   & .top-nav {
-    border-radius: 16px;
+    border-radius: 10px;
     background: white;
     overflow: hidden;
     height: 44px;
