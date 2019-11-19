@@ -2,17 +2,41 @@ import React from 'react';
 import styled from 'styled-components';
 
 const TopNavEl = styled.div`
-  /* position: absolute;
-  top: 60px;
-  left: 50%;
-  transform: translateX(-50%); */
-  border-radius: 16px;
-  background: white;
-  overflow: hidden;
-  height: 44px;
-  animation: topNavEl .7s ease-out;
-  z-index: 100;
-  position: relative;
+`;
+
+const NavWrapper = styled.div`
+  & .top-nav {
+    border-radius: 16px;
+    background: white;
+    overflow: hidden;
+    height: 44px;
+    animation: topNavEl .7s ease-out;
+    z-index: 100;
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  & .scroll-bar {
+    position: relative;
+    height: 7px;
+    > span {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, #FFD75B 0vw, #FFB593 10vw);
+      border-right: 1px solid white;
+      width: ${({ width }) => `${width}%`};
+      transition: width .3s;
+    }
+    > div {
+      height: 100%;
+      width: 100%;
+      background: #D8D8D8;
+    }
+  }
 
   @keyframes topNavEl {
     0% {
@@ -27,23 +51,6 @@ const TopNavEl = styled.div`
 `;
 
 const ScrollBar = styled.div`
-  position: relative;
-  height: 10px;
-  > span {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, #FFD75B 0vw, #FFB593 10vw);
-    border-right: 1px solid white;
-    width: ${({ width }) => `${width}%`};
-    transition: width .3s;
-  }
-  > div {
-    height: 100%;
-    width: 100%;
-    background: #D8D8D8;
-  }
 `;
 
 const Chapter = styled.span`
@@ -67,18 +74,26 @@ const ContentList = styled.div`
   align-items: flex-end;
 `;
 
+interface ITopNavProps {
+  chapter: string;
+  list: string[];
+  slide: number;
+}
+
 export const TopNav = (props) => {
   const { chapter, list, slide } = props;
   return (
-    <TopNavEl>
-      <ScrollBar width={ (slide + 1.5) / list.length * 100 }>
-        <span />
-        <div />
-      </ScrollBar>
-      <ContentList>
-        <Chapter>{ chapter }</Chapter>
-        { list.map((text, index) => <Chapter key={ text } className={ slide === index && 'active' || '' }>{ text }</Chapter>) }
-      </ContentList>
-    </TopNavEl>
+    <NavWrapper className="top-row" width={ (slide + 1.5) / list.length * 100 }>
+      <div className="top-nav">
+        <div className="scroll-bar">
+          <span />
+          <div />
+        </div>
+        <ContentList>
+          <Chapter>{ chapter }</Chapter>
+          { list.map((text, index) => <Chapter key={ text } className={ slide === index && 'active' || '' }>{ text }</Chapter>) }
+        </ContentList>
+      </div>
+    </NavWrapper>
   );
 }

@@ -5,8 +5,11 @@ import styled from 'styled-components';
 import scrollImg from '../../img/scroll-black.svg';
 
 interface IBottomNavProps {
-  next: string;
-  onClick: Function;
+  next?: string;
+  onNext?: Function;
+  back?: string;
+  onBack?: string;
+  className?: string;
 }
 
 const Next = styled.span`
@@ -32,9 +35,9 @@ const BottomNavEl = styled.div`
 `;
 
 export const BottomNav = (props: IBottomNavProps) => {
-  const { next, onNext, back, onBack } = props;
+  const { next, onNext, back, onBack, className } = props;
   return (
-    <div style={ {
+    <div className={ className } style={ {
       display: 'flex',
       justifyContent: 'space-between',
       flexDirection: 'row-reverse'

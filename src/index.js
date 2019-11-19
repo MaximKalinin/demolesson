@@ -7,33 +7,16 @@ import './index.css';
 import { LeftMenu } from './layout/LeftMenu';
 import { Main } from './layout/Main';
 import { RightDescription } from './layout/RightDescription';
-import watchImg from '../img/watch.svg';
-import readImg from '../img/read.svg';
-import scrollImg from '../img/scroll.svg';
 import greekFont from '../fonts/Greek.ttf';
 import TouchBackend from 'react-dnd-touch-backend';
 import { DndProvider } from 'react-dnd';
-import heavenImg from '../img/heaven.svg';
 import { Description } from './components/Description';
 import { TopNav } from './components/TopNav';
 import fp from 'lodash/fp';
-
-import { introduction, introductionBody } from './pages/introduction';
+import { IntroductionPage } from './pages/introduction';
 import { Scene } from './components/Scene';
-import { haos, haosBody, leftHeader } from './pages/haos';
-
-const content = [{ description: introduction, body: introductionBody, leftHeader: null }, { description: haos, body: haosBody, leftHeader: leftHeader }];
-
-const actions = [{
-  text: 'Смотри',
-  src: watchImg
-}, {
-  text: 'Читай',
-  src: readImg
-}, {
-  text: 'Скролль',
-  src: scrollImg
-}];
+import { haos, haosBody, leftHeader, HaosPage } from './pages/haos';
+import { BookPage } from './layout/BookPage';
 
 interface IAppProps {
 
@@ -90,56 +73,82 @@ const withStyles = (Component) => (props) => (
 
 const App = (props: IAppProps) => {
   const [slide, setSlide] = useState<number>(0);
-  const onNextClick = () => content[slide + 1] ? setSlide(slide + 1) : undefined;
+  const onNextClick = () => slides[slide + 1] ? setSlide(slide + 1) : undefined;
   const onPrevClick = () => slide - 1 >= 0 ? setSlide(slide - 1) : undefined;
+  // return (
+  //   <AppWrapper>
+  //     <LeftMenu actions={ actions } />
+  //     <Main>
+  //       <div style={ { display: 'flex', flexDirection: 'row-reverse', height: '100%' } }>
+  //         <RightDescription>
+  //           { content.map(({ description }, index) => (
+  //             <ISlideEl className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' } key={ index }>
+  //               <Description
+  //                 { ...description({ onNextClick, onPrevClick }) }
+  //               />
+  //             </ISlideEl>
+  //           )) }
+  //         </RightDescription>
+  //         <Scene>
+  //           <TopNav
+  //             chapter={ '2. БОГИ' }
+  //             list={ ['Введение', 'Хаос', 'ПАНТЕОН', 'Уран', 'Кронос', 'Зевс', 'Аид', 'Посейдон', 'Другие боги', 'ФИНАЛ'] }
+  //             slide={ slide }
+  //           />
+  //           { content.map(({ body }, index) => (<ISlideEl top={ '64px' } className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' } key={ index }>{ body() }</ISlideEl>)) }
+  //         </Scene>
+  //         <div style={ {
+  //           margin: '87px 0 40px 40px',
+  //           flex: '44px 0 0',
+  //           position: 'relative'
+  //         } }
+  //         >
+  //           <div style={ {
+  //             height: '44px',
+  //             background: 'white',
+  //             display: 'flex',
+  //             justifyContent: 'center',
+  //             alignItems: 'center',
+  //             borderRadius: '16px',
+  //           } }>
+  //             <img src={ heavenImg } style={ { height: '30px' } } />
+  //           </div>
+  //           { content.map(({ leftHeader }, index) => (
+  //             leftHeader &&
+  //             <ISlideEl className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' } key={ index }>
+  //               { leftHeader }
+  //             </ISlideEl>
+  //           )) }
+  //         </div>
+  //       </div>
+  //     </Main>
+  //   </AppWrapper>
+  // );
+  // const description = ({ className }) => (
+  //   <Description
+  //     className={ className }
+  //     { ...content[0].description({ onNextClick, onPrevClick }) }
+  //   />
+  // );
+  const slides = [
+    (index) => <IntroductionPage
+      onNextClick={ onNextClick }
+      slide={ slide }
+      active={ slide === index }
+      visited={ index < slide }
+      key={ index }
+    />,
+    (index) => <HaosPage
+      onNextClick={ onNextClick }
+      onPrevClick={ onPrevClick }
+      slide={ slide }
+      active={ slide === index }
+      visited={ index < slide }
+      key={ index }
+    />
+  ];
   return (
-    <AppWrapper>
-      <LeftMenu actions={ actions } />
-      <Main>
-        <div style={ { display: 'flex', flexDirection: 'row-reverse', height: '100%' } }>
-          <RightDescription>
-            { content.map(({ description }, index) => (
-              <ISlideEl className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' } key={ index }>
-                <Description
-                  { ...description({ onNextClick, onPrevClick }) }
-                />
-              </ISlideEl>
-            )) }
-          </RightDescription>
-          <Scene>
-            <TopNav
-              chapter={ '2. БОГИ' }
-              list={ ['Введение', 'Хаос', 'ПАНТЕОН', 'Уран', 'Кронос', 'Зевс', 'Аид', 'Посейдон', 'Другие боги', 'ФИНАЛ'] }
-              slide={ slide }
-            />
-            { content.map(({ body }, index) => (<ISlideEl top={ '64px' } className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' } key={ index }>{ body() }</ISlideEl>)) }
-          </Scene>
-          <div style={ {
-            margin: '87px 0 40px 40px',
-            flex: '44px 0 0',
-            position: 'relative'
-          } }
-          >
-            <div style={ {
-              height: '44px',
-              background: 'white',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: '16px',
-            } }>
-              <img src={ heavenImg } style={ { height: '30px' } } />
-            </div>
-            { content.map(({ leftHeader }, index) => (
-              leftHeader &&
-              <ISlideEl className={ index === slide && 'current' || index === (slide - 1) && 'prev' || '' } key={ index }>
-                { leftHeader }
-              </ISlideEl>
-            )) }
-          </div>
-        </div>
-      </Main>
-    </AppWrapper>
+    slides.map((slideItem, index) => slideItem(index))
   );
 };
 

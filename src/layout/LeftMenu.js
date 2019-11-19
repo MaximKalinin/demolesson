@@ -58,3 +58,22 @@ export const LeftMenu = (props: ILeftMenuProps) => {
     </LeftMenuEl>
   );
 }
+
+export const LeftMenu2 = (props: ILeftMenuProps) => {
+  const { actions } = props;
+  return (
+    <div className="row-grid">
+      <div className="top-row h-centered">
+        <img src={ burgerMenuImg } />
+      </div>
+      <div className="v-centered h-centered">
+        { actions.map(({ text, src }) => (
+          <ActionEl key={ text }>
+            <span>{ text }</span>
+            <img src={ src } />
+          </ActionEl>
+        )) }
+      </div>
+    </div>
+  );
+}
