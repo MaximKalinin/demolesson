@@ -32,30 +32,50 @@ const AppEl = styled.div`
 	}
 `;
 
+const getTouch = fp.get('touches[0]');
+
+const ghostImg = new Image();
+ghostImg.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=';
+
 export const AppIcon = (props) => {
 	const [startPos, setStartPos] = useState([0, 0]);
 	const [deltaPos, setDeltaPos] = useState([0, 0]);
 	const imgStyle = {
 		transform: `translate(${deltaPos[0]}px, ${deltaPos[1]}px)`
 	};
+	const onMouseMove = fp.flow([
+		(event) => [event.clientX, event.clientY],
+		mapWithIndex((coord, index) => coord - startPos[index]),
+		setDeltaPos
+	]);
+	const onMouseStart = fp.flow([
+		(event) => [event.clientX, event.clientY],
+		setStartPos
+	]);
+	const onMouseEnd = fp.flow([
+		() => setStartPos([0, 0]),
+		() => setDeltaPos([0, 0])
+	]);
 	return (
 		<AppEl>
 			<img
 				style={ imgStyle }
 				src={ galaxyImg }
 				onTouchMove={ fp.flow([
-					(event) => [event.touches[0].clientX, event.touches[0].clientY],
-					mapWithIndex((coord, index) => coord - startPos[index]),
-					setDeltaPos
+					getTouch,
+					onMouseMove
 				]) }
 				onTouchStart={ fp.flow([
-					(event) => [event.touches[0].clientX, event.touches[0].clientY],
-					setStartPos
+					getTouch,
+					onMouseStart
 				]) }
-				onTouchEnd={ fp.flow([
-					() => setStartPos([0, 0]),
-					() => setDeltaPos([0, 0])
+				onTouchEnd={ onMouseEnd }
+				onDragStart={ fp.flow([
+					fp.tap((event) => event.dataTransfer.setDragImage(ghostImg, 0, 0)),
+					onMouseStart
 				]) }
+				onDragCapture={ onMouseMove }
+				onDragEnd={ onMouseEnd }
 			/>
 			<div>
 				<h3>ХАОС</h3>

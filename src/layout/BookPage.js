@@ -21,12 +21,10 @@ const ColumnGrid = styled.div`
     align-self: flex-end;
   }
   & .v-centered {
-    margin-top: auto;
-    margin-bottom: auto;
+    align-self: center;
   }
   & .h-centered {
-    margin-left: auto;
-    margin-right: auto;
+    justify-self: center;
   }
   & .text-and-content {
     display: grid;
