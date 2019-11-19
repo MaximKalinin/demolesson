@@ -45,7 +45,10 @@ export const AppIcon = (props) => {
 	};
 	const onMouseMove = fp.flow([
 		(event) => [event.clientX, event.clientY],
-		mapWithIndex((coord, index) => coord - startPos[index]),
+		fp.cond([
+			[fp.matches([0, 0]), fp.identity],
+			[fp.stubTrue, mapWithIndex((coord, index) => coord - startPos[index])]
+		]),
 		setDeltaPos
 	]);
 	const onMouseStart = fp.flow([
