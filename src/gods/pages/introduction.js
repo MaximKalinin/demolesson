@@ -9,15 +9,9 @@ import fp from 'lodash/fp';
 import { Description } from '../../components/Description';
 import { BookPage } from '../../layout/BookPage';
 import { TopNav } from '../../components/TopNav';
-
-export const BigP = styled.p`
-  font-size: 26px;
-  margin-top: 39px;
-`;
-
-export const B = styled.b`
-  font-weight: 600;
-`;
+import { BigP } from '../../components/BigParagraph';
+import { B } from '../../components/Bold';
+import { IPageProps } from '../../model/common';
 
 export interface ISlideProps {
   onNextClick: Function;
@@ -91,14 +85,7 @@ export const introduction = ({ onNextClick }: ISlideProps) => ({
 
 // export const introductionBody = () => ();
 
-interface IIntroductionProps {
-  onNextClick: Function;
-  slide: number;
-  active: boolean;
-  visited: boolean;
-}
-
-export const IntroductionPage = (props: IIntroductionProps) => {
+export const IntroductionPage = (props: IPageProps) => {
   const { onNextClick, slide, active, visited } = props;
   return (
     <BookPage active={ active } visited={ visited }>

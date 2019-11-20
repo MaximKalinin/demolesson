@@ -2,8 +2,8 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  // entry: './src/crete/index.js',
-  entry: './src/gods/index.js',
+  entry: './src/crete/index.js',
+  // entry: './src/gods/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index_bundle_[hash].js',

@@ -5,12 +5,14 @@ import { useDrop } from 'react-dnd';
 import { BottomNav } from '../../components/BottomNav';
 import { AppIcon } from '../../components/AppIcon';
 import universeImg from '../../../img/universe-placeholder.svg';
-import { ISlideProps, BigP, B } from './introduction';
+import { ISlideProps } from './introduction';
 import zeusImg from "../../../img/zeus.svg";
 import { TopNav } from '../../components/TopNav';
 import heavenImg from '../../../img/heaven.svg';
 import { BookPage } from '../../layout/BookPage';
 import { Description } from '../../components/Description';
+import { BigP } from '../../components/BigParagraph';
+import { B } from '../../components/Bold';
 
 export const haos = ({ onNextClick, onPrevClick }: ISlideProps) => ({
   h2: 'Хаос',
@@ -102,6 +104,7 @@ export const HaosPage = (props: IHaosProps) => {
   const { active, slide, onNextClick, onPrevClick, visited } = props;
   return (
     <BookPage active={ active } visited={ visited }>
+      { console.log('hello') }
       <div className="row-grid content-grid">
         <div className={ 'heaven-button top-row' }>
           <img src={ heavenImg } />

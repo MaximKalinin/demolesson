@@ -35,7 +35,8 @@ const ColumnGrid = styled.div`
   & .content-grid {
     display: grid;
     grid-template-columns: 74px 1fr;
-    margin: 0 30px;
+    padding: 0 30px;
+    position: relative;
     & .heaven-button {
       height: 44px;
       width: 44px;
@@ -48,6 +49,14 @@ const ColumnGrid = styled.div`
       img {
         height: 50%;
       }
+    }
+    .full-screen-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-height: 100vh;
+      min-width: calc(100% + 100px);
+      max-width: calc(100% + 200px);
     }
   }
   & .slideable {

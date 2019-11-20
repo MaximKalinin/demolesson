@@ -83,7 +83,7 @@ interface ITopNavProps {
 export const TopNav = (props) => {
   const { chapter, list, slide } = props;
   return (
-    <NavWrapper className="top-row" width={ (slide + 1.5) / list.length * 100 }>
+    <NavWrapper className="top-row" width={ (slide + chapter ? 1.5 : 1) / list.length * 100 }>
       <div className="top-nav">
         <div className="scroll-bar">
           <span />
