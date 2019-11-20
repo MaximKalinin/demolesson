@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+}
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,600,700&display=swap&subset=cyrillic');
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
+@font-face {
+  font-family: 'Greek';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../../fonts/Greek.ttf') format("opentype");
+}

@@ -37,7 +37,7 @@ const getTouch = fp.get('touches[0]');
 const ghostImg = new Image();
 ghostImg.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=';
 
-export const AppIcon = (props) => {
+export const AppIcon = () => {
 	const [startPos, setStartPos] = useState([0, 0]);
 	const [deltaPos, setDeltaPos] = useState([0, 0]);
 	const imgStyle = {
