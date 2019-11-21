@@ -7,5 +7,6 @@
 [lints]
 
 [options]
+experimental.enums=true
 
 [strict]

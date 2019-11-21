@@ -10,22 +10,19 @@ import { BottomNav } from '../../components/BottomNav';
 import { BigP } from '../../components/BigParagraph';
 import { B } from '../../components/Bold';
 import { IPageProps } from '../../model/common';
+import { getClassName } from '../../utils/getClassName';
+
+const imageClass = getClassName('slide-in', 'fade-out');
 
 export const Introduction = (props: IPageProps) => {
-  const { active, visited, slide, onNextClick } = props;
+  const { active, visited, slide, onNextClick, direction } = props;
   return (
     <BookPage active={ active } visited={ visited }>
       <div className="row-grid content-grid">
         <div
-          className="full-screen-image"
+          className={ `full-screen-image slide-in fade-out anim` }
           style={ {
             background: `url(${crete1Img})`,
-            width: '100%',
-            height: '100%',
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            borderRadius: '50px'
           } }
         />
         <div className={ 'heaven-button top-row' }>
